@@ -1,0 +1,25 @@
+.scoper {
+    background-color:antiquewhite;
+    max-width: 200px;
+    text-align: center;
+    margin: 50% auto;
+ border-color:  rgb(238, 204, 118);
+}
+.start{
+    background-color: rgb(175, 252, 252);
+    border: 0px;
+    border-radius: 10%;
+    margin: 10px;
+}
+.stop{
+    background-color: rgb(247, 105, 92);
+    border: 0px;
+    border-radius: 10%;
+    margin: 10px;
+}
+.reset{
+    background-color: rgb(221, 219, 110);
+    border: 0px;
+    border-radius: 10%;
+    margin: 10px;
+}
