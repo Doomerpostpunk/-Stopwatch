@@ -1,0 +1,38 @@
+body{
+    background-color: black;
+    color: aliceblue;
+
+}
+#container {
+   font-size: 20px;
+   border: 1px solid  rgb(5, 43, 92);
+    max-width: 200px;
+    text-align: center;
+    margin: 50% auto;
+}
+.start{
+    border: 1px solid rgb(244, 43, 12);
+    background-color: black;
+    color:rgb(244, 43, 12);
+    border-radius: 10%;
+    margin: 10px;
+}
+.stop{
+    border: 1px solid rgb(5, 109, 45);
+    background-color: black;
+    color:rgb(5, 109, 45);
+    border-radius: 10%;
+    margin: 10px;
+}
+.reset{
+    border: 1px solid rgb(93, 3, 99);
+    background-color: black;
+    color: rgb(93, 3, 99);
+    background-color: black;
+    border-radius: 10%;
+    margin: 10px;
+}
+.list{
+    list-style-type:none;
+    padding-left: 12px;
+}
