@@ -1,49 +1,30 @@
 const container=document.getElementById('container')
 
-const scope=document.createElement('div');
-scope.classList.add('scoper')
-container.appendChild(scope);
+const creatureElement = (type, title, className) => {
+    const element = document.createElement(type);
+    element.innerText = title;
+    if(className) {
+      element.classList.add(className);
+    }
 
-
-const min=document.createElement('span');
-min.textContent='00';
-scope.appendChild(min);
-
-const span1=document.createElement('span');
-span1.textContent=':';
-scope.appendChild(span1);
-
-const sec=document.createElement('span');
-sec.textContent='00';
-scope.appendChild(sec);
-
-const span2=document.createElement('span');
-span2.textContent=':';
-scope.appendChild(span2);
-
-const milli=document.createElement('span');
-milli.textContent='00';
-scope.appendChild(milli);
-
-const list=document.createElement('ul');
-scope.appendChild(list);
-
-const start=document.createElement('button');
-start.textContent='Start';
-start.classList.add('start')
-scope.appendChild(start);
-
-const stop=document.createElement('button');
-stop.textContent='Stop';
-stop.classList.add('stop')
-scope.appendChild(stop);
-
-const reset=document.createElement('button');
-reset.textContent='Reset';
-reset.classList.add('reset')
-scope.appendChild(reset);
-
-
+    return element
+  }
+const min= creatureElement('span','00');
+container.appendChild(min)
+container.appendChild(creatureElement('span',':'))
+const sec= creatureElement('span','00');
+container.appendChild(sec)
+container.appendChild(creatureElement('span',':'))
+const milli=creatureElement('span','00');
+container.appendChild(milli);
+const list=creatureElement('ul','', 'list');
+container.appendChild(list)
+const start=creatureElement('button','start', 'start')
+container.appendChild(start)
+const stop=creatureElement('button','stop', 'stop')
+container.appendChild(stop)
+const reset=creatureElement('button','reset', 'reset')
+container.appendChild(reset)
 
 const counter=()=>{
     const count={
@@ -59,26 +40,36 @@ const counter=()=>{
    const incrementcount=()=>
     {
         count.milliseconds+=1;
-        if(count.milliseconds>=100)
-        {
-            count.seconds+=1;
-            count.milliseconds=0;
-        }
-        if(count.seconds>=60)
-        {
-            count.minute+=1;
-            count.seconds=0;
-        }
+        const onMilliseconds = (milliseconds) => {
+            if(milliseconds >= 100) {
+                        count.seconds+=1;
+                      count.milliseconds=0;
+            }
+          }
+         
+          const onSeconds = (seconds) => {
+            if(seconds >= 60) {
+                        count.minute+=1;
+                      count.seconds=0;
+            }
+          }
+          onMilliseconds(count.milliseconds)
+          onSeconds(count.seconds)
         return count;
     };
     return incrementcount
 }
 const incrementcounter=counter();
+
 const handlecount=()=>{
     const {milliseconds,seconds,minute}=incrementcounter()
-    milli.innerText=String(milliseconds).padStart(2,"0");
-    sec.innerText=String(seconds).padStart(2,"0");
-    min.innerText=String(minute).padStart(2,"0");
+
+    const innerTextcounter=(elem, elem2)=>{
+        elem.innerText=String(elem2).padStart(2,"0");
+    }
+ innerTextcounter(milli,milliseconds);
+ innerTextcounter(sec,seconds);
+ innerTextcounter(min,minute);
 }
 
 const obj={
@@ -86,9 +77,13 @@ const obj={
 }
 
 const startInterval=()=>{
+    
     return ()=>{
         obj.idInterval=setInterval(()=>handlecount(),10)
+        start.setAttribute('disabled','disabled')
+    stop.removeAttribute('disabled')
     }
+  
 }
 
 const handleclearInterval=()=>{
@@ -97,7 +92,9 @@ const handleclearInterval=()=>{
     li.innerHTML=`<span id="min">${min.innerHTML}</span>:
                   <span id="sec">${sec.innerHTML}</span>:
                   <span id="milli">${milli.innerHTML}</span>;`
-                  list.append(li)
+                  list.append(li);
+                  stop.setAttribute('disabled', 'disabled')
+                  start.removeAttribute('disabled')
 }
 
 
